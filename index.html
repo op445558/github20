@@ -1,0 +1,1364 @@
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <script src="./skin/vue.global.prod.3.4.27.js"></script>
+    <link rel="stylesheet" href="./skin/style.css">
+    <link rel="stylesheet" href="./skin/style_icon.css">
+    <link rel="stylesheet" href="./skin/index.css">
+    <script src="./skin/nutui.umd.4.3.8.js"></script>
+    <title>联盛集团</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link rel="icon" href="./static/upload/image/20250417/1744888913542556.png" type="image/png">
+   <style>
+        /* 赛博朋克霓虹背景 */
+        html {
+            background: #0a0a0f !important;
+            min-height: 100vh;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%) !important;
+            background-attachment: fixed !important;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+        
+        /* ===== 视觉冲击动态效果 ===== */
+        
+        /* 霓虹网格 */
+        .neon-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            background: 
+                linear-gradient(90deg, rgba(0,255,255,0.03) 1px, transparent 1px),
+                linear-gradient(rgba(0,255,255,0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: grid-move 20s linear infinite;
+        }
+        
+        @keyframes grid-move {
+            0% { transform: perspective(500px) rotateX(60deg) translateY(0); }
+            100% { transform: perspective(500px) rotateX(60deg) translateY(50px); }
+        }
+        
+        /* 激光束 */
+        .laser-beams {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
+            overflow: hidden;
+        }
+        
+        .laser {
+            position: absolute;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(180deg, transparent, #ff00ff, transparent);
+            box-shadow: 0 0 20px #ff00ff, 0 0 40px #ff00ff;
+            animation: laser-sweep 3s ease-in-out infinite;
+        }
+        
+        .laser:nth-child(1) { left: 20%; animation-delay: 0s; }
+        .laser:nth-child(2) { left: 50%; animation-delay: 1s; background: linear-gradient(180deg, transparent, #00ffff, transparent); box-shadow: 0 0 20px #00ffff, 0 0 40px #00ffff; }
+        .laser:nth-child(3) { left: 80%; animation-delay: 2s; }
+        
+        @keyframes laser-sweep {
+            0%, 100% { opacity: 0; transform: translateX(-100px) scaleY(0); }
+            50% { opacity: 1; transform: translateX(0) scaleY(1); }
+        }
+        
+        /* 闪电效果 */
+        .lightning {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .bolt {
+            position: absolute;
+            width: 3px;
+            height: 150px;
+            background: linear-gradient(180deg, #ffff00, #ff6600);
+            box-shadow: 0 0 30px #ffff00, 0 0 60px #ff6600;
+            animation: flash 2s infinite;
+            opacity: 0;
+        }
+        
+        .bolt:nth-child(1) { left: 15%; top: 10%; animation-delay: 0.5s; transform: rotate(15deg); }
+        .bolt:nth-child(2) { left: 45%; top: 5%; animation-delay: 1.2s; transform: rotate(-10deg); }
+        .bolt:nth-child(3) { left: 75%; top: 15%; animation-delay: 1.8s; transform: rotate(20deg); }
+        
+        @keyframes flash {
+            0%, 90%, 100% { opacity: 0; }
+            5% { opacity: 1; }
+            10% { opacity: 0; }
+            15% { opacity: 1; }
+            20% { opacity: 0; }
+        }
+        
+        /* 霓虹粒子 */
+        .neon-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #00ffff;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
+            animation: particle-float 8s infinite linear;
+        }
+        
+        .particle:nth-child(odd) { background: #ff00ff; box-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff; }
+        
+        .particle:nth-child(1) { left: 10%; top: 100%; animation-delay: 0s; }
+        .particle:nth-child(2) { left: 25%; top: 100%; animation-delay: 1s; }
+        .particle:nth-child(3) { left: 40%; top: 100%; animation-delay: 2s; }
+        .particle:nth-child(4) { left: 55%; top: 100%; animation-delay: 3s; }
+        .particle:nth-child(5) { left: 70%; top: 100%; animation-delay: 4s; }
+        .particle:nth-child(6) { left: 85%; top: 100%; animation-delay: 5s; }
+        .particle:nth-child(7) { left: 15%; top: 100%; animation-delay: 6s; }
+        .particle:nth-child(8) { left: 60%; top: 100%; animation-delay: 7s; }
+        
+        @keyframes particle-float {
+            0% { transform: translateY(0) scale(1); opacity: 1; }
+            100% { transform: translateY(-100vh) scale(0.5); opacity: 0; }
+        }
+        
+        /* 扫描线 */
+        .scan-line {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, transparent, #ff00ff, #00ffff, #ff00ff, transparent);
+            box-shadow: 0 0 20px #ff00ff;
+            animation: scan 4s linear infinite;
+            z-index: 3;
+            pointer-events: none;
+        }
+        
+        @keyframes scan {
+            0% { top: -5px; }
+            100% { top: 100vh; }
+        }
+        
+        /* 脉冲光环 */
+        .pulse-ring {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            height: 300px;
+            border: 2px solid rgba(0,255,255,0.3);
+            border-radius: 50%;
+            animation: pulse-expand 3s ease-out infinite;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .pulse-ring:nth-child(2) { animation-delay: 1s; }
+        .pulse-ring:nth-child(3) { animation-delay: 2s; }
+        
+        @keyframes pulse-expand {
+            0% { transform: translate(-50%, -50%) scale(0.5); opacity: 1; border-color: rgba(0,255,255,0.5); }
+            100% { transform: translate(-50%, -50%) scale(3); opacity: 0; border-color: rgba(255,0,255,0); }
+        }
+        
+        /* ===== 页面结构 ===== */
+        
+        .page {
+            background: transparent !important;
+            position: relative;
+            z-index: 10;
+            min-height: 100vh;
+        }
+        
+        /* app-item 使用 bg3.png */
+        .page .cont-box .app-list .app-item {
+            background: url("./images/bg3.png") no-repeat !important;
+            background-size: 100% 100% !important;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .page .cont-box .notice-bar {
+            background: linear-gradient(90deg, #1a1a2e 0%, #16213e 100%) !important;
+            border: 1px solid rgba(0,255,255,0.3);
+            box-shadow: 0 0 20px rgba(0,255,255,0.2);
+            position: relative;
+            z-index: 10;
+        }
+        
+        /* 快捷入口图片圆角 */
+        .page .cont-box .app-box a {
+            border-radius: 12px;
+            overflow: hidden;
+            display: block;
+            box-shadow: 0 0 15px rgba(255,0,255,0.3);
+            transition: all 0.3s;
+        }
+        .page .cont-box .app-box a:hover {
+            box-shadow: 0 0 30px rgba(0,255,255,0.5);
+            transform: scale(1.05);
+        }
+        .page .cont-box .app-box a img {
+            border-radius: 12px;
+            display: block;
+        }
+        
+        /* 文字颜色 */
+        .page .cont-box .app-list .app-item .info-box .app-info .top-info .info .name {
+            color: #00ffff !important;
+            text-shadow: 0 0 10px rgba(0,255,255,0.5);
+        }
+        .page .cont-box .app-list .app-item .info-box .app-info .top-info .info .link {
+            color: #ffffff !important;
+        }
+        
+        /* 下载按钮霓虹效果 */
+        .download-text {
+            font-weight: bold;
+            background: linear-gradient(90deg, #ff00ff, #00ffff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 10px rgba(255,0,255,0.5);
+        }
+        
+        /* 原有样式 */
+        .lang_radio { display: none; }
+        .lang_radio_img { vertical-align: unset !important; width: 13px !important; height: 13px !important; margin-top: 0px !important; cursor: pointer; margin-right: 3px !important; margin-top: 4px !important; display: inline; min-height: unset !important; min-width: unset !important; }
+        .marquee-container { width: 100%; overflow: hidden; white-space: nowrap; box-sizing: border-box; position: relative; }
+        .marquee { display: inline-block; padding-left: 10%; animation: marquee 25s linear infinite; }
+        @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
+        .responsive-img { max-width: 100%; height: auto; }
+        
+        /* 客服链接 */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { min-height: 100vh; position: relative; overflow-x: hidden; font-family: Arial, "Microsoft Yahei", sans-serif; }
+        .top-links { position: absolute; top: 3%; right: 3%; display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; max-width: 40%; }
+        .bottom-link { position: fixed; top: 50%; right: 20px; transform: translateY(-50%); animation: float 2s ease-in-out infinite; z-index: 1000; }
+        .image-link { display: block; transition: all 0.3s ease; filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3)); }
+        .image-link img { width: 150px; height: auto; border-radius: 8px; }
+        .image-link:hover { transform: scale(1.1); filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.4)); }
+        @keyframes float { 0%, 100% { transform: translateY(-50%) translateY(0); } 50% { transform: translateY(-50%) translateY(-10px); } }
+        @media (max-width: 768px) { .top-links { gap: 10px; max-width: 60%; } .bottom-link { right: 10px; } .bottom-link img { width: 100px !important; } }
+        @media (min-width: 1200px) { .top-links { gap: 20px; } }
+    </style>
+</head>
+<body>
+    <!-- 视觉冲击背景元素 -->
+    <div class="neon-grid"></div>
+    
+    <div class="laser-beams">
+        <div class="laser"></div>
+        <div class="laser"></div>
+        <div class="laser"></div>
+    </div>
+    
+    <div class="lightning">
+        <div class="bolt"></div>
+        <div class="bolt"></div>
+        <div class="bolt"></div>
+    </div>
+    
+    <div class="neon-particles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+    
+    <div class="scan-line"></div>
+    
+    <div class="pulse-ring"></div>
+    <div class="pulse-ring"></div>
+    <div class="pulse-ring"></div>
+
+</head>
+
+<body>
+    <div id="app" class="page" data-v-app="">
+        <div class="page-cont">
+            <div class="head-bar">
+            </div>
+
+            <img src="./static/upload/image/20250417/1744882140152519.png" class="responsive-img">
+
+            <div class="cont-box" style="margin-top: -18px;">
+
+                <div class="notice-bar">
+                    <img class="img" src="./skin/icon1.png">
+                    <div class="msg-bar">
+                        <div class="marquee-container">
+                            <div class="marquee" style="font-size: 17px;color: #D7C09D;">
+                                联盛集团：十年老平台，信誉保障、福利优厚、优质服务，联盛集团长期招收实力代理、合作伙伴，共同携手创造辉煌！
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                          <style>
+        /* ========== 在线人数显示样式 ========== */
+        .online-counter {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin: 15px auto;
+            background: linear-gradient(135deg, rgba(255,215,0,0.2), rgba(255,140,0,0.1));
+            border: 1px solid rgba(255,215,0,0.5);
+            border-radius: 20px;
+            padding: 8px 20px;
+            backdrop-filter: blur(10px);
+            animation: counter-pulse 2s ease-in-out infinite;
+        }
+        
+        .online-dot {
+            width: 8px;
+            height: 8px;
+            background: #00ff00;
+            border-radius: 50%;
+            animation: dot-blink 1s ease-in-out infinite;
+            box-shadow: 0 0 10px #00ff00;
+        }
+        
+        .online-text {
+            color: #ffd700;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .online-number {
+            color: #fff;
+            font-size: 14px;
+            font-weight: 700;
+            text-shadow: 0 0 10px rgba(255,215,0,0.5);
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        .online-number.jump {
+            animation: numberJump 0.4s ease-out;
+            color: #00ff00;
+            text-shadow: 0 0 20px #00ff00;
+        }
+        
+        @keyframes numberJump {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.4); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes dot-blink {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(0.8); }
+        }
+        
+        @keyframes counter-pulse {
+            0%, 100% { box-shadow: 0 0 10px rgba(255,215,0,0.3); }
+            50% { box-shadow: 0 0 20px rgba(255,215,0,0.6); }
+        }
+        
+        /* ========== 实时提现（奖励墙）样式 ========== */
+        .reward-wall {
+            max-width: 320px;
+            margin: 15px auto 0;
+            background: linear-gradient(135deg, rgba(255,215,0,0.15) 0%, rgba(255,140,0,0.1) 100%);
+            border: 2px solid rgba(255, 215, 0, 0.4);
+            border-radius: 12px;
+            padding: 10px 15px;
+            box-shadow: 
+                0 0 20px rgba(255, 215, 0, 0.2),
+                inset 0 0 20px rgba(255, 215, 0, 0.05);
+            overflow: hidden;
+        }
+        
+        .reward-wall-title {
+            text-align: center;
+            font-size: 14px;
+            font-weight: 700;
+            color: #ffd700;
+            margin-bottom: 8px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.3);
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+        
+        .reward-scroll-container {
+            height: 100px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .reward-scroll-content {
+            animation: scroll-up 10s linear infinite;
+        }
+        
+        .reward-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 0;
+            white-space: nowrap;
+            font-size: 12px;
+            border-bottom: 1px dashed rgba(255, 215, 0, 0.2);
+        }
+        
+        .reward-item:last-child {
+            border-bottom: none;
+        }
+        
+        .reward-icon-small {
+            font-size: 14px;
+        }
+        
+        .reward-user {
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 500;
+        }
+        
+        .reward-action {
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .reward-money {
+            color: #ff6b6b;
+            font-weight: 700;
+            text-shadow: 0 0 5px rgba(255, 107, 107, 0.5);
+        }
+        
+        @keyframes scroll-up {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-50%); }
+        }
+        
+        /* 页面基础样式 */
+
+        
+        h2 {
+            color: #ffd700;
+            margin: 30px 0 15px;
+            text-shadow: 0 0 10px rgba(255,215,0,0.5);
+        }
+        
+        .demo-section {
+            background: rgba(0,0,0,0.3);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+a.btn1 {
+  display: inline-block;
+  padding: 3% 3%;
+  text-align: center;
+  text-decoration: none;
+  
+  /* 背景图横向自适应，高度自动 */
+  background-image: url(./images/bg2.png);
+  background-size: 100% 100%;
+  background-position: center top;
+  background-repeat: no-repeat;
+  
+  border-radius: 6px;
+}
+
+a.btn1 .download-text {
+  color: #fff;
+  font-size: 14px;
+}
+    </style>
+<body>
+    
+    <!-- ========== 1. 在线人数 HTML代码 ========== -->
+    
+        <!-- 在线人数显示 -->
+        <div class="online-counter" id="onlineCounter">
+            <div class="online-dot"></div>
+            <span class="online-text">当前在线</span>
+            <span class="online-number" id="onlineNumber">930
+			</span>
+        </div>
+    
+    
+    <!-- ========== 2. 实时提现 HTML代码 ========== -->
+    
+ 
+    
+    <!-- ========== JavaScript 功能代码 ========== -->
+    <script>
+        // ========== 在线人数动态更新 ==========
+        let currentOnline = 912;
+        const onlineNumberEl = document.getElementById('onlineNumber');
+        
+        function updateOnlineNumber() {
+            // 随机增减人数（模拟真实波动）
+            const change = Math.floor(Math.random() * 50) - 20;
+            currentOnline += change;
+            // 保持在合理范围
+            if (currentOnline < 800) currentOnline = 800;
+            if (currentOnline > 5000) currentOnline = 5000;
+            
+            // 添加跳动动画
+            onlineNumberEl.classList.add('jump');
+            setTimeout(() => {
+                onlineNumberEl.classList.remove('jump');
+            }, 400);
+            
+            // 格式化数字
+            onlineNumberEl.textContent = currentOnline.toLocaleString();
+        }
+        
+        // 每3秒更新一次在线人数
+        setInterval(updateOnlineNumber, 3000);
+        
+        // ========== 实时提现滚动墙系统 ==========
+        const rewardScrollContent = document.getElementById('rewardScrollContent');
+        const rewardNames = ['张**老板', '李**老板', '王**老板', '刘**老板', '陈**老板', '杨**老板', '赵**老板', '黄**老板', '周**老板', '吴**老板'];
+        const rewardAmounts = ['¥1,888', '¥3,888', '¥5,888', '¥8,888', '¥10,000', '¥18,888', '¥28,888', '¥66,666'];
+        const rewardActions = ['刚提现', '中奖', '充值', '赢得'];
+        
+        function generateRewardItems() {
+            let html = '';
+            // 生成10条数据（5条显示，5条用于循环）
+            for (let i = 0; i < 10; i++) {
+                const randomName = rewardNames[Math.floor(Math.random() * rewardNames.length)];
+                const randomAmount = rewardAmounts[Math.floor(Math.random() * rewardAmounts.length)];
+                const randomAction = rewardActions[Math.floor(Math.random() * rewardActions.length)];
+                html += `
+                    <div class="reward-item">
+                        <span class="reward-icon-small">🎉</span>
+                        <span class="reward-user">${randomName}</span>
+                        <span class="reward-action">${randomAction}</span>
+                        <span class="reward-money">${randomAmount}</span>
+                    </div>
+                `;
+            }
+            rewardScrollContent.innerHTML = html;
+        }
+        
+        // 初始化生成奖励条目
+        generateRewardItems();
+        
+        // 每5秒更新一条数据
+        function updateRewardItem() {
+            const items = rewardScrollContent.querySelectorAll('.reward-item');
+            const randomIndex = Math.floor(Math.random() * items.length);
+            const randomName = rewardNames[Math.floor(Math.random() * rewardNames.length)];
+            const randomAmount = rewardAmounts[Math.floor(Math.random() * rewardAmounts.length)];
+            const randomAction = rewardActions[Math.floor(Math.random() * rewardActions.length)];
+            
+            items[randomIndex].innerHTML = `
+                <span class="reward-icon-small">🎉</span>
+                <span class="reward-user">${randomName}</span>
+                <span class="reward-action">${randomAction}</span>
+                <span class="reward-money">${randomAmount}</span>
+            `;
+        }
+        
+        setInterval(updateRewardItem, 5000);
+    </script>
+    
+</body>
+                <div class="app-box">
+                    <a href="javascript:;">
+              <img src="./skin/03e415ea274147be9de036e938fc0258.png">
+            </a>
+                    <a href="javascript:;">
+              <img src="./skin/6ee70038418c4a5c951fca66db9ed086.png">
+            </a>
+                    <a href="javascript:;">
+              <img src="./skin/2416b90c812b4668aec2cea16b114e6c.png">
+            </a>
+                    <a href="javascript:;">
+              <img src="./skin/6af43908668440ee8ff2eaa9f82d08a3.png">
+            </a>
+                </div>
+                <div class="pay-box">
+                    <img src="./skin/img1.png">
+                                                        <div class="pay-box">
+                                        <a href="https://tronscan.org/#/address/TYX54R5NCyvP11zk1jvLyTE3qQL2RHe6QS" target="_blank" rel="noopener">
+              <img src="https://yx90.cc/images/bg33.png"></a>
+                                                                     
+                <div class="app-list">
+                    <div class="app-item">
+                        <div class="info-box">
+                            <div class="app-icon">
+                                <img src="./static/upload/image/20250327/1743067939459295.png" alt="">
+                            </div>
+                            <div class="app-info">
+                                <div class="top-info">
+                                    <div class="info">
+                                        <div class="name">
+                                            名爵 APP<br>房间:222780 
+                                        </div>
+                                        <div class="link">
+                                            <a href="javascript:;">
+                          
+                        </a>
+                                            <a href="javascript:;">
+                          
+                        </a>
+                                        </div>
+                                    </div>
+                                    <a class="active" href="./lists/22.html">
+                      <img src="./skin/img2.png" alt="">
+                    </a>
+                                </div>
+                                <div class="label-list">
+                                    <a href="javascript:;" class="label">
+                      澳洲5/10
+                    </a>
+                                    <a href="javascript:;" class="label">
+                      极速赛车
+                    </a>
+                                    <a href="javascript:;" class="label">
+                      极速飞艇
+                    </a>
+                                    <a href="javascript:;" class="label">
+                      极速时时彩
+                    </a>
+                                    <a href="javascript:;" class="label">
+                      重庆时时彩
+                    </a>
+                                    <a href="javascript:;" class="label">
+                      幸运飞艇
+                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="btn-box">
+                            <a class="btn" href="#" id="link20">
+                  <img src="./skin/icon6.png">
+                  <span class="download-text">
+                    下载APP
+                  </span>
+                </a>
+                            <a class="btn" href="#" id="kefu20">
+                  <img src="./skin/icon7.png">
+                  <span class="download-text">
+                    在线客服
+                  </span>
+                </a>
+                        </div>
+                    </div>
+                    <div id="aaa20" style="display: none;">
+                        <view class="nut-overlay" style="transition-duration: 0.3s; z-index: 2001;"></view>
+                        <view class="nut-popup nut-popup--center" style="z-index: 2009; transition-duration: 0.3s;">
+                            <div class="dailog-popup download">
+                                <div class="close" id="guanbi20"></div>
+                                <div class="title"></div>
+                                <div class="line"></div>
+                                <div class="btn-list"><a class="btn" href="https://bv02.cc/mjpg1xz.html"><img src="./images/icon9.png" alt=""><span class="download-text">  名爵 APP苹果官方下载</span></a><a class="btn" href="tzmjxz.html"><img src="./images/icon10.png" alt=""><span class="download-text">  名爵 APP安卓官方下载</span></a><a class="btn" href="https://mjweb.xyz/"><img src="./images/icon10.png" alt=""><span class="download-text">  名爵 通用H5登录</span></a>
+                               </div>
+                               </div>
+                        </view>
+                    </div>
+                    <script>
+                        const link20 = document.getElementById('link20');
+                        const aaa20 = document.getElementById('aaa20');
+                        link20.addEventListener('click', function(event) {
+                            event.preventDefault();
+                            aaa20.style.display = 'block';
+                        });
+                        const closeButton20 = document.getElementById('guanbi20');
+                        const content20 = document.getElementById('aaa20');
+                        closeButton20.addEventListener('click', function() {
+                            content20.style.display = 'none';
+                        });
+                    </script>
+                    <div id="kefudiv20" style="display: none;">
+                        <view class="nut-overlay" style="transition-duration: 0.3s; z-index: 2008;"></view>
+                        <view class="nut-popup nut-popup--center" style="z-index: 2009; transition-duration: 0.3s;">
+                            <div class="dailog-popup kf" style="background: url(./skin/bg4s.png) 0% 0% / 100% 100% no-repeat; position: relative;">
+                                <div class="close" id="guanbib20"></div>
+                                <div class="title"></div>
+                                <div class="line"></div>
+                                <div class="kf-list"><a class="kf-item" href="https://tawk.to/chat/69d8ee2e35e8b81c34519c42/1jlrm4qdq" target="_blank" rel="noopener"><img class="icon1" src="./skin/0544aa35b27947c89122b31183d19d04.png" alt=""><div class="cont"><p class="download-text">在线客服</p><p class="desc">快速、便捷、及时提供沟通～</p></div><img class="icon2" src="./skin/icon14.png" alt=""></a>
+                                    <a
+                                        class="kf-item" href="https://13t.cn/"><img class="icon1" src="./skin/2a33227e485644ec9c723710b4847416.png" target="_blank" alt="">
+                                        <div class="cont">
+                                            <p class="download-text">三条：</p>
+                                            <p class="desc">一对一沟通高效解决问题～</p>
+                                        </div><img class="icon2" src="./skin/icon15.png"></a>
+                                </div>
+                            </div>
+                        </view>
+                    </div>
+                    <script>
+                        const kefu20 = document.getElementById('kefu20');
+                        const kefudiv20 = document.getElementById('kefudiv20');
+                        kefu20.addEventListener('click', function(event) {
+                            event.preventDefault();
+                            kefudiv20.style.display = 'block';
+                        });
+                        const closeButtona20 = document.getElementById('guanbib20');
+                        const contenta20 = document.getElementById('kefudiv20');
+                        closeButtona20.addEventListener('click', function() {
+                            contenta20.style.display = 'none';
+                        });
+                    </script>
+                    <div class="app-item">
+                        <div class="info-box">
+                            <div class="app-icon">
+                                <img src="./static/upload/image/20250327/1743067814322335.png" alt="">
+                            </div>
+                            <div class="app-info">
+                                <div class="top-info">
+                                    <div class="info">
+                                        <div class="name">
+                                            香港六合彩
+                                        </div>
+                                        <div class="link">
+                                            <a href="javascript:;">
+                          香港赛马会官方彩种
+                        </a>
+                                            <a href="javascript:;">
+                          
+                        </a>
+                                        </div>
+                                    </div>
+                                    <a class="active" href="./lists/22.html">
+                      <img src="./skin/img2.png" alt="">
+                    </a>
+                                </div>
+                                <div class="label-list2">
+                                <a class="btn1" href="https://1kai.win/gallery" target="_blank" rel="noopener">
+                  
+                  <span class="download-text">
+                    港台神算
+                  </span>
+                </a>
+				<a class="btn1" href="https://1kai.win/gallery" target="_blank" rel="noopener">
+                  
+                  <span class="download-text">
+                    马会财经
+                  </span>
+                </a>
+				<a class="btn1" href="https://1kai.win/gallery"target="_blank" rel="noopener" >
+                  
+                  <span class="download-text">
+                    港澳赌王
+                  </span>
+                </a>
+				<a class="btn1" href="https://1kai.win/gallery"target="_blank" rel="noopener" >
+                  
+                  <span class="download-text">
+                    濠江赌经
+                  </span>
+                </a>
+				<a class="btn1" href="https://1kai.win/gallery" target="_blank" rel="noopener">
+                  
+                  <span class="download-text">
+                    香江赌经
+                  </span>
+                </a>
+				<a class="btn1" href="https://1kai.win/gallery" target="_blank" rel="noopener">
+                  
+                  <span class="download-text">
+                    九龙内幕
+                  </span>
+                </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="btn-box">
+                            <a class="btn" href="#" id="link19">
+                  <img src="./skin/icon6.png">
+                  <span class="download-text">
+                    下载APP
+                  </span>
+                </a>
+                            <a class="btn" href="#" id="kefu19">
+                  <img src="./skin/icon7.png">
+                  <span class="download-text">
+                    在线客服
+                  </span>
+                </a>
+                        </div>
+                    </div>
+                    <div id="aaa19" style="display: none;">
+                        <view class="nut-overlay" style="transition-duration: 0.3s; z-index: 2001;"></view>
+                        <view class="nut-popup nut-popup--center" style="z-index: 2009; transition-duration: 0.3s;">
+                            <div class="dailog-popup download">
+                                <div class="close" id="guanbi19"></div>
+                                <div class="title"></div>
+                                <div class="line"></div>
+                                 <div class="btn-list"><a class="btn" href="https://bv02.cc/mjpg1xz.html"><img src="./images/icon9.png" alt=""><span class="download-text">  名爵 APP苹果官方下载</span></a><a class="btn" href="tzmjxz.html"><img src="./images/icon10.png" alt=""><span class="download-text">  名爵 APP安卓官方下载</span></a><a class="btn" href="https://mjweb.xyz/"><img src="./images/icon10.png" alt=""><span class="download-text">  名爵 通用H5登录</span></a>
+                               </div>
+                            </div>
+                        </view>
+                    </div>
+                    <script>
+                        const link19 = document.getElementById('link19');
+                        const aaa19 = document.getElementById('aaa19');
+                        link19.addEventListener('click', function(event) {
+                            event.preventDefault();
+                            aaa19.style.display = 'block';
+                        });
+                        const closeButton19 = document.getElementById('guanbi19');
+                        const content19 = document.getElementById('aaa19');
+                        closeButton19.addEventListener('click', function() {
+                            content19.style.display = 'none';
+                        });
+                    </script>
+                    <div id="kefudiv19" style="display: none;">
+                        <view class="nut-overlay" style="transition-duration: 0.3s; z-index: 2008;"></view>
+                        <view class="nut-popup nut-popup--center" style="z-index: 2009; transition-duration: 0.3s;">
+                            <div class="dailog-popup kf" style="background: url(./skin/bg4s.png) 0% 0% / 100% 100% no-repeat; position: relative;">
+                                <div class="close" id="guanbib19"></div>
+                                <div class="title"></div>
+                                <div class="line"></div>
+                                <div class="kf-list"><a class="kf-item" href="https://tawk.to/chat/69d8ee2e35e8b81c34519c42/1jlrm4qdq" target="_blank" rel="noopener"><img class="icon1" src="./skin/0544aa35b27947c89122b31183d19d04.png" alt=""><div class="cont"><p class="download-text">在线客服</p><p class="desc">快速、便捷、及时提供沟通～</p></div><img class="icon2" src="./skin/icon14.png" alt=""></a>
+                                    <a
+                                         class="kf-item" href="https://13t.cn/"><img class="icon1" src="./skin/2a33227e485644ec9c723710b4847416.png" target="_blank" alt="">
+                                        <div class="cont">
+                                            <p class="download-text">三条：</p>
+                                            <p class="desc">一对一沟通高效解决问题～</p>
+                                        </div><img class="icon2" src="./skin/icon15.png"></a>
+                                </div>
+                            </div>
+                        </view>
+                    </div>
+                    <script>
+                        const kefu19 = document.getElementById('kefu19');
+                        const kefudiv19 = document.getElementById('kefudiv19');
+                        kefu19.addEventListener('click', function(event) {
+                            event.preventDefault();
+                            kefudiv19.style.display = 'block';
+                        });
+                        const closeButtona19 = document.getElementById('guanbib19');
+                        const contenta19 = document.getElementById('kefudiv19');
+                        closeButtona19.addEventListener('click', function() {
+                            contenta19.style.display = 'none';
+                        });
+                    </script>
+<div class="app-item">
+                        <div class="info-box">
+                            <div class="app-icon">
+                                <img src="./static/upload/image/20250327/1743067814322338.png" alt="">
+                            </div>
+                            <div class="app-info">
+                                <div class="top-info">
+                                    <div class="info">
+                                        <div class="name">
+                                            宾果六合彩
+                                        </div>
+										<div class="download-text">
+                                            
+											台湾官方开奖彩种<br>5分钟一期
+                                        </div>
+                                        <div class="link">
+                                            <a href="javascript:;">
+                          
+                        </a>
+                                            <a href="javascript:;">
+                          
+                        </a>
+                                        </div>
+                                    </div>
+                                    <a class="active" href="./lists/22.html">
+                      <img src="./skin/img2.png" alt="">
+                    </a>
+                                </div>
+                                 <div class="label-list2">
+                                <a class="btn1" href="https://1kai.win/gallery" target="_blank" rel="noopener">
+                  
+                  <span class="download-text">
+                    港台神算
+                  </span>
+                </a>
+				<a class="btn1" href="https://1kai.win/gallery" target="_blank" rel="noopener">
+                  
+                  <span class="download-text">
+                    马会财经
+                  </span>
+                </a>
+				<a class="btn1" href="https://1kai.win/gallery" target="_blank" rel="noopener">
+                  
+                  <span class="download-text">
+                    港澳赌王
+                  </span>
+                </a>
+                <br>
+				<a class="btn1" href="https://1kai.win/gallery"target="_blank" rel="noopener" >
+                  
+                  <span class="download-text">
+                    濠江赌经
+                  </span>
+                </a>
+				<a class="btn1" href="https://1kai.win/gallery" target="_blank" rel="noopener">
+                  
+                  <span class="download-text">
+                    香江赌经
+                  </span>
+                </a>
+				<a class="btn1" href="https://1kai.win/gallery" target="_blank" rel="noopener">
+                  
+                  <span class="download-text">
+                    九龙内幕
+                  </span>
+                </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="btn-box">
+                            <a class="btn" href="#" id="link17">
+                  <img src="./skin/icon6.png">
+                  <span class="download-text">
+                    下载APP
+                  </span>
+                </a>
+                            <a class="btn" href="#" id="kefu17">
+                  <img src="./skin/icon7.png">
+                  <span class="download-text">
+                    在线客服
+                  </span>
+                </a>
+                        </div>
+                    </div>
+                    <div id="aaa17" style="display: none;">
+                        <view class="nut-overlay" style="transition-duration: 0.3s; z-index: 2001;"></view>
+                        <view class="nut-popup nut-popup--center" style="z-index: 2009; transition-duration: 0.3s;">
+                            <div class="dailog-popup download">
+                                <div class="close" id="guanbi17"></div>
+                                <div class="title"></div>
+                                <div class="line"></div>
+                                 <div class="btn-list"><a class="btn" href="https://bv02.cc/mjpg1xz.html"><img src="./images/icon9.png" alt=""><span class="download-text">  名爵 APP苹果官方下载</span></a><a class="btn" href="tzmjxz.html"><img src="./images/icon10.png" alt=""><span class="download-text">  名爵 APP安卓官方下载</span></a><a class="btn" href="https://mjweb.xyz/"><img src="./images/icon10.png" alt=""><span class="download-text">  名爵 通用H5登录</span></a>
+                               </div>
+                            </div>
+                        </view>
+                    </div>
+                    <script>
+                        const link17 = document.getElementById('link17');
+                        const aaa17 = document.getElementById('aaa17');
+                        link17.addEventListener('click', function(event) {
+                            event.preventDefault();
+                            aaa17.style.display = 'block';
+                        });
+                        const closeButton17 = document.getElementById('guanbi17');
+                        const content17 = document.getElementById('aaa17');
+                        closeButton17.addEventListener('click', function() {
+                            content17.style.display = 'none';
+                        });
+                    </script>
+                    <div id="kefudiv17" style="display: none;">
+                        <view class="nut-overlay" style="transition-duration: 0.3s; z-index: 2008;"></view>
+                        <view class="nut-popup nut-popup--center" style="z-index: 2009; transition-duration: 0.3s;">
+                            <div class="dailog-popup kf" style="background: url(./skin/bg4s.png) 0% 0% / 100% 100% no-repeat; position: relative;">
+                                <div class="close" id="guanbib17"></div>
+                                <div class="title"></div>
+                                <div class="line"></div>
+                                <div class="kf-list"><a class="kf-item" href="https://tawk.to/chat/69d8ee2e35e8b81c34519c42/1jlrm4qdq" target="_blank" rel="noopener"><img class="icon1" src="./skin/0544aa35b27947c89122b31183d19d04.png" alt=""><div class="cont"><p class="download-text">在线客服</p><p class="desc">快速、便捷、及时提供沟通～</p></div><img class="icon2" src="./skin/icon14.png" alt=""></a>
+                                    <a
+                                         class="kf-item" href="https://13t.cn/"><img class="icon1" src="./skin/2a33227e485644ec9c723710b4847416.png" target="_blank" alt="">
+                                        <div class="cont">
+                                            <p class="download-text">三条：</p>
+                                            <p class="desc">一对一沟通高效解决问题～</p>
+                                        </div><img class="icon2" src="./skin/icon15.png"></a>
+                                </div>
+                            </div>
+                        </view>
+                    </div>
+                    <script>
+                        const kefu17 = document.getElementById('kefu17');
+                        const kefudiv17 = document.getElementById('kefudiv17');
+                        kefu17.addEventListener('click', function(event) {
+                            event.preventDefault();
+                            kefudiv17.style.display = 'block';
+                        });
+                        const closeButtona17 = document.getElementById('guanbib17');
+                        const contenta17 = document.getElementById('kefudiv17');
+                        closeButtona17.addEventListener('click', function() {
+                            contenta17.style.display = 'none';
+                        });
+                    </script>
+
+<div class="app-item">
+                        <div class="info-box">
+                            <div class="app-icon">
+                                <img src="./static/upload/image/20250327/1743067814322339.png" alt="">
+                            </div>
+                            <div class="app-info">
+                                <div class="top-info">
+                                    <div class="info">
+                                        <div class="name">
+                                            壹号 开奖网
+                                        </div>
+                                        <div class="link">
+                                            <a href="javascript:;">
+                          香港宾果六合彩开奖页
+                        </a>
+                                            <a href="javascript:;">
+                          
+                        </a>
+                                        </div>
+                                    </div>
+                                    <a class="active" href="./lists/22.html">
+                      <img src="./skin/img2.png" alt="">
+                    </a>
+                                </div>
+                                <div class="label-list">
+                                    <a href="javascript:;" class="label">
+                      澳洲5/10
+                    </a>
+                                    <a href="javascript:;" class="label">
+                      极速赛车
+                    </a>
+                                    <a href="javascript:;" class="label">
+                      极速飞艇
+                    </a>
+                                    <a href="javascript:;" class="label">
+                      极速时时彩
+                    </a>
+                                    <a href="javascript:;" class="label">
+                      重庆时时彩
+                    </a>
+                                    <a href="javascript:;" class="label">
+                      幸运飞艇
+                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="btn-box">
+                            <a class="btn" href="index.html#" id="link26">
+                  <img src="./skin/icon6.png">
+                  <span class="download-text">
+                    进入开奖网
+                  </span>
+                </a>
+                            <a class="btn" href="index.html#" id="kefu26">
+                  <img src="./skin/icon7.png">
+                  <span class="download-text">
+                    在线客服
+                  </span>
+                </a>
+                        </div>
+                    </div>
+                    <div id="aaa26" style="display: none;">
+                        <view class="nut-overlay" style="transition-duration: 0.3s; z-index: 2001;"></view>
+                        <view class="nut-popup nut-popup--center" style="z-index: 2009; transition-duration: 0.3s;">
+                            <div class="dailog-popup download">
+                                <div class="close" id="guanbi26"></div>
+                                <div class="title"></div>
+                                <div class="line"></div>
+                                <div class="btn-list"><a class="btn" href="https://1689437.com/"><img src="./images/icon9.png" alt=""><span class="download-text">  168 开奖网苹果官方下载</span></a><a class="btn" href="https://1689437.com/"><img src="./images/icon10.png" alt=""><span class="download-text">  168 开奖网安卓官方下载</span></a>
+                                    <a
+                                        class="btn" id="apppg26"><img src="./images/icon11.png" alt=""><span class="download-text">  168 开奖网苹果安装教程</span></a><a class="btn" id="anzhuo26"><img src="./images/icon11.png" alt=""><span class="download-text">  168 开奖网安卓安装教程</span></a></div>
+                            </div>
+                        </view>
+                    </div>
+                    <script>
+                        const link26 = document.getElementById('link26');
+                        if (link26) {
+                            link26.addEventListener('click', function(event) {
+                                event.preventDefault();
+                                // 跳转到百度
+								window.open('https://1kai.win/', '_blank');
+                                
+                            });
+                        }
+                    </script>
+                    <div id="kefudiv26" style="display: none;">
+                        <view class="nut-overlay" style="transition-duration: 0.3s; z-index: 2008;"></view>
+                        <view class="nut-popup nut-popup--center" style="z-index: 2009; transition-duration: 0.3s;">
+                            <div class="dailog-popup kf" style="background: url(skin/bg4s.png) 0% 0% / 100% 100% no-repeat; position: relative;">
+                                <div class="close" id="guanbib26"></div>
+                                <div class="title"></div>
+                                <div class="line"></div>
+                                <div class="kf-list"><a class="kf-item" href="https://tawk.to/chat/69d8ee2e35e8b81c34519c42/1jlrm4qdq" target="_blank" rel="noopener"><img class="icon1" src="./skin/0544aa35b27947c89122b31183d19d04.png" alt=""><div class="cont"><p class="download-text">在线客服</p><p class="desc">快速、便捷、及时提供沟通～</p></div><img class="icon2" src="./skin/icon14.png" alt=""></a>
+                                    <a
+                                         class="kf-item" href="https://13t.cn/"><img class="icon1" src="./skin/2a33227e485644ec9c723710b4847416.png" target="_blank" alt="">
+                                        <div class="cont">
+                                            <p class="download-text">三条：</p>
+                                            <p class="desc">一对一沟通高效解决问题～</p>
+                                        </div><img class="icon2" src="./skin/icon15.png"></a>
+                                </div>
+                            </div>
+                        </view>
+                    </div>
+                    <script>
+                        const kefu26 = document.getElementById('kefu26');
+                        const kefudiv26 = document.getElementById('kefudiv26');
+                        kefu26.addEventListener('click', function(event) {
+                            event.preventDefault();
+                            kefudiv26.style.display = 'block';
+                        });
+                        const closeButtona26 = document.getElementById('guanbib26');
+                        const contenta26 = document.getElementById('kefudiv26');
+                        closeButtona26.addEventListener('click', function() {
+                            contenta26.style.display = 'none';
+                        });
+                    </script>
+
+
+                    <div class="app-item">
+                        <div class="info-box">
+                            <div class="app-icon">
+                                <img src="./static/upload/image/20250327/1743067973965241.png" alt="">
+                            </div>
+                            <div class="app-info">
+                                <div class="top-info">
+                                    <div class="info">
+                                        <div class="name">
+                                            168 开奖网
+                                        </div>
+                                        <div class="link">
+                                            <a href="javascript:;">
+                          认准联盛集团<br>
+                        </a>
+                                            <a href="javascript:;">
+                          安全有保障
+                        </a>
+                                        </div>
+                                    </div>
+                                    <a class="active" href="./lists/22.html">
+                      <img src="./skin/img2.png" alt="">
+                    </a>
+                                </div>
+                                <div class="label-list">
+                                    <a href="javascript:;" class="label">
+                      澳洲5/10
+                    </a>
+                                    <a href="javascript:;" class="label">
+                      极速赛车
+                    </a>
+                                    <a href="javascript:;" class="label">
+                      极速飞艇
+                    </a>
+                                    <a href="javascript:;" class="label">
+                      极速时时彩
+                    </a>
+                                    <a href="javascript:;" class="label">
+                      重庆时时彩
+                    </a>
+                                    <a href="javascript:;" class="label">
+                      幸运飞艇
+                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="btn-box">
+                            <a class="btn" href="#" id="link21">
+                  <img src="./skin/icon6.png">
+                  <span class="download-text">
+                    进入开奖网
+                  </span>
+                </a>
+                            <a class="btn" href="#" id="kefu21">
+                  <img src="./skin/icon7.png">
+                  <span class="download-text">
+                    在线客服
+                  </span>
+                </a>
+                        </div>
+                    </div>
+                    <div id="aaa21" style="display: none;">
+                        <view class="nut-overlay" style="transition-duration: 0.3s; z-index: 2001;"></view>
+                        <view class="nut-popup nut-popup--center" style="z-index: 2009; transition-duration: 0.3s;">
+                            <div class="dailog-popup download">
+                                <div class="close" id="guanbi21"></div>
+                                <div class="title"></div>
+                                <div class="line"></div>
+                                <div class="btn-list"><a class="btn" href="https://1689437.com/"><img src="./images/icon9.png" alt=""><span class="download-text">  168 开奖网苹果官方下载</span></a><a class="btn" href="https://1689437.com/"><img src="./images/icon10.png" alt=""><span class="download-text">  168 开奖网安卓官方下载</span></a>
+                                    <a
+                                        class="btn" id="apppg21"><img src="./images/icon11.png" alt=""><span class="download-text">  168 开奖网苹果安装教程</span></a><a class="btn" id="anzhuo21"><img src="./images/icon11.png" alt=""><span class="download-text">  168 开奖网安卓安装教程</span></a></div>
+                            </div>
+                        </view>
+                    </div>
+                   <script>
+                        const link21 = document.getElementById('link21');
+                        if (link21) {
+                            link21.addEventListener('click', function(event) {
+                                event.preventDefault();
+                                // 跳转到百度
+								window.open('https://1689437.com/', '_blank');
+                                
+                            });
+                        }
+                    </script>
+                    <div id="kefudiv21" style="display: none;">
+                        <view class="nut-overlay" style="transition-duration: 0.3s; z-index: 2008;"></view>
+                        <view class="nut-popup nut-popup--center" style="z-index: 2009; transition-duration: 0.3s;">
+                            <div class="dailog-popup kf" style="background: url(./skin/bg4s.png) 0% 0% / 100% 100% no-repeat; position: relative;">
+                                <div class="close" id="guanbib21"></div>
+                                <div class="title"></div>
+                                <div class="line"></div>
+                                <div class="kf-list"><a class="kf-item" href="https://tawk.to/chat/69d8ee2e35e8b81c34519c42/1jlrm4qdq" target="_blank" rel="noopener"><img class="icon1" src="./skin/0544aa35b27947c89122b31183d19d04.png" alt=""><div class="cont"><p class="download-text">在线客服</p><p class="desc">快速、便捷、及时提供沟通～</p></div><img class="icon2" src="./skin/icon14.png" alt=""></a>
+                                    <a
+                                         class="kf-item" href="https://13t.cn/"><img class="icon1" src="./skin/2a33227e485644ec9c723710b4847416.png" target="_blank" alt="">
+                                        <div class="cont">
+                                            <p class="download-text">三条：</p>
+                                            <p class="desc">一对一沟通高效解决问题～</p>
+                                        </div><img class="icon2" src="./skin/icon15.png"></a>
+                                </div>
+                            </div>
+                        </view>
+                    </div>
+                    <script>
+                        const kefu21 = document.getElementById('kefu21');
+                        const kefudiv21 = document.getElementById('kefudiv21');
+                        kefu21.addEventListener('click', function(event) {
+                            event.preventDefault();
+                            kefudiv21.style.display = 'block';
+                        });
+                        const closeButtona21 = document.getElementById('guanbib21');
+                        const contenta21 = document.getElementById('kefudiv21');
+                        closeButtona21.addEventListener('click', function() {
+                            contenta21.style.display = 'none';
+                        });
+                    </script>
+
+                </div>
+            </div>
+        </div>
+        <div class="course-dialog show" id="dialog" style="display: none;">
+            <div id="dialogBg" class="bg"></div>
+            <div id="dialogCentera" class="center">
+                <div class="line"></div>
+                <div class="imgModel" id="iosImg">
+                    <div class="teachTitle">苹果安装教程</div><img src="./skin/783d34c4e5fd44b5837e74c2a67fb248.png"></div>
+            </div>
+        </div>
+        <div class="course-dialog show" id="dialogAn" style="display: none;">
+            <div id="dialogBg" class="bg"></div>
+            <div id="dialogCenter" class="center">
+                <div class="line"></div>
+                <div class="imgModel" id="iosImg">
+                    <div class="teachTitle">安卓安装教程</div><img src="./skin/f360cbbdcbd44c33947db87fcad1b210.png"></div>
+            </div>
+        </div>
+    </div>
+    <script>
+        const showContentLinks = document.querySelectorAll('[id^="apppg"]');
+        const anzhuo = document.querySelectorAll('[id^="anzhuo"]');
+        const dialog = document.getElementById('dialog');
+        const dialogAn = document.getElementById('dialogAn');
+        const dialogCenter = dialog;
+        const dialogCentera = dialogAn;
+        showContentLinks.forEach(showContentLink => {
+            showContentLink.addEventListener('click', function(event) {
+                event.stopPropagation();
+                dialog.style.display = 'block';
+            });
+        });
+
+        anzhuo.forEach(showContentLink => {
+            showContentLink.addEventListener('click', function(event) {
+                event.stopPropagation();
+                dialogAn.style.display = 'block';
+            });
+        });
+
+        document.addEventListener('click', function() {
+            dialog.style.display = 'none';
+            dialogAn.style.display = 'none';
+
+        });
+    </script>
+    <script src="./skin/jquery-2.1.1.min.js"></script>
+</body>
+<style>
+    /* 右上角链接容器 */
+    .top-links {
+        position: absolute;
+        top: 3%;
+        right: 3%;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        max-width: 40%;
+    }
+
+    /* 右下角客服链接 - 已修改为固定定位并垂直居中 */
+    .bottom-link {
+        position: fixed;
+        top: 50%;
+        right: 20px;
+        transform: translateY(-50%);
+        animation: float 2s ease-in-out infinite;
+        z-index: 1000; /* 确保图标在所有元素上方 */
+    }
+
+    /* 图片链接通用样式 */
+    .image-link {
+        display: block;
+        transition: all 0.3s ease;
+        filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+    }
+
+    .image-link img {
+        width: 50x;
+        height: auto;
+        border-radius: 8px;
+    }
+
+    /* 悬停效果 */
+    .image-link:hover {
+        transform: scale(1.1); /* 修正缩放值，避免过大 */
+        filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.4));
+    }
+
+    /* 浮动动画 */
+    @keyframes float {
+        0%, 100% {
+            transform: translateY(-50%) translateY(0);
+        }
+        50% {
+            transform: translateY(-50%) translateY(-10px);
+        }
+    }
+
+    /* 手机端适配 */
+    @media (max-width: 768px) {
+        .top-links {
+            gap: 10px;
+            max-width: 60%;
+        }
+        .bottom-link {
+            right: 10px;
+        }
+        .bottom-link img {
+            width: 50px !important;
+        }
+    }
+
+    @media (min-width: 1200px) {
+        .top-links {
+            gap: 20px;
+        }
+    }
+    </style>
+
+</html>
